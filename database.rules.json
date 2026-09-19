@@ -1,0 +1,15 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "sessions": {
+      "$sessionId": {
+        "entries": {
+          "$entryId": {
+            ".validate": "newData.hasChildren(['fullName', 'status', 'createdAt']) && newData.child('fullName').isString() && newData.child('fullName').val().length > 0 && newData.child('fullName').val().length <= 120 && newData.child('status').isString() && newData.child('createdAt').isNumber()"
+          }
+        }
+      }
+    }
+  }
+}

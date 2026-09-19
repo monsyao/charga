@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2783de" />
+  <title>Очередь — группа 2</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">О</div>
+      <div>
+        <p class="eyebrow">Лабораторные работы</p>
+        <h1>Очередь</h1>
+      </div>
+      <span class="group-badge">Группа 2</span>
+    </header>
+
+    <section id="mode-banner" class="notice is-hidden" role="status"></section>
+
+    <section class="session-card" aria-labelledby="session-title">
+      <div class="session-heading">
+        <div>
+          <p class="eyebrow">Текущий цикл</p>
+          <h2 id="session-title">Загрузка…</h2>
+        </div>
+        <span id="session-status" class="status-badge">Проверка времени</span>
+      </div>
+      <div class="session-meta">
+        <div>
+          <span class="meta-label">Запись открывается</span>
+          <strong id="open-time">—</strong>
+        </div>
+        <div>
+          <span class="meta-label">Очередь</span>
+          <strong id="queue-count">0 человек</strong>
+        </div>
+        <div>
+          <span class="meta-label">Сейчас</span>
+          <strong id="clock">—</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel booking-panel" aria-labelledby="booking-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Новая запись</p>
+            <h2 id="booking-title">Займите место в очереди</h2>
+          </div>
+          <span class="step-number">01</span>
+        </div>
+        <form id="booking-form" novalidate>
+          <label for="full-name">ФИО</label>
+          <input id="full-name" name="fullName" type="text" autocomplete="name" placeholder="Например, Иванов Иван Иванович" maxlength="120" required />
+          <p class="field-hint">После записи ждите своей очереди. Новая запись станет доступна только после нажатия «Сдал лабу».</p>
+          <button id="book-button" class="button button-primary" type="submit" disabled>
+            <span>Записаться на ближайшее место</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+        <div id="personal-status" class="personal-status is-hidden" aria-live="polite"></div>
+      </section>
+
+      <section class="panel queue-panel" aria-labelledby="queue-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">В реальном времени</p>
+            <h2 id="queue-title">Текущая очередь</h2>
+          </div>
+          <span id="live-dot" class="live-indicator"><i></i> Live</span>
+        </div>
+        <div id="queue-list" class="queue-list" aria-live="polite">
+          <div class="empty-state">Загрузка очереди…</div>
+        </div>
+      </section>
+    </section>
+
+    <section class="how-it-works">
+      <div class="how-item"><span>1</span><div><strong>Откройте запись</strong><p>За 10 минут до начала пары.</p></div></div>
+      <div class="how-item"><span>2</span><div><strong>Займите место</strong><p>Очередь формируется по времени записи.</p></div></div>
+      <div class="how-item"><span>3</span><div><strong>Сдайте лабу</strong><p>После сдачи можно записаться снова.</p></div></div>
+    </section>
+
+    <footer class="footer">
+      <span>Время сайта: Москва (UTC+3)</span>
+      <span id="next-session">Следующий цикл: —</span>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="firebase-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
