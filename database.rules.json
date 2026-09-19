@@ -1,12 +1,16 @@
 {
   "rules": {
     ".read": "auth != null",
-    ".write": "auth != null",
+    "admins": {
+      ".read": "auth != null",
+      ".write": false
+    },
     "sessions": {
+      ".write": "auth != null",
       "$sessionId": {
         "entries": {
           "$entryId": {
-            ".validate": "newData.hasChildren(['fullName', 'status', 'createdAt']) && newData.child('fullName').isString() && newData.child('fullName').val().length > 0 && newData.child('fullName').val().length <= 120 && newData.child('status').isString() && newData.child('createdAt').isNumber()"
+            ".validate": "!newData.exists() || (newData.hasChildren(['uid', 'fullName', 'status', 'createdAt', 'slotNumber']) && newData.child('uid').isString() && newData.child('uid').val().length > 0 && newData.child('fullName').isString() && newData.child('fullName').val().length > 0 && newData.child('fullName').val().length <= 120 && newData.child('createdAt').isNumber() && newData.child('slotNumber').isNumber() && newData.child('slotNumber').val() >= 1 && (newData.child('status').val() === 'active' || newData.child('status').val() === 'completed' || newData.child('status').val() === 'skipped' || newData.child('status').val() === 'cancelled'))"
           }
         }
       }
